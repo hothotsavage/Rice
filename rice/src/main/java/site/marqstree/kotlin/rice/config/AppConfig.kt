@@ -39,7 +39,7 @@ object AppConfig {
     }
 
     //获取全局Handler
-    fun getHandler(): Handler? {
+    fun getHandler(): Handler {
         return getConfiguration<Handler>(ConfigKeys.HANDLER)
     }
 

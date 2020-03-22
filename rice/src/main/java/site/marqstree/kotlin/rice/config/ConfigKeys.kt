@@ -23,7 +23,6 @@ enum class ConfigKeys {
     ACTIVITY,  //微信集成用上下文
     HANDLER,  //全局handler
     JAVASCRIPT_INTERFACE,  //js调用java时，注入js中的接口对象名
-    WEB_HOST,  //后端服务器名
     AVATAR_SIZE,    //剪切头像的最大尺寸
     IS_DEBUG,    //开启调试?
     QINIU_FILE_SERVER_ADDRESS,     //七牛文件服务地址

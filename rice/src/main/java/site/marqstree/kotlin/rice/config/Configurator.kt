@@ -8,6 +8,7 @@ import com.joanzapata.iconify.IconFontDescriptor
 import com.joanzapata.iconify.Iconify
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
+import com.tencent.smtt.sdk.QbSdk
 import io.reactivex.exceptions.UndeliverableException
 import io.reactivex.plugins.RxJavaPlugins
 import okhttp3.Interceptor
@@ -42,6 +43,7 @@ class Configurator private constructor(){
     init {
         //实例化建造者时，标识开始初始化
         CONFIGS.put(ConfigKeys.CONFIG_READY, false)
+        //记录全局Handler
         CONFIGS.put(ConfigKeys.HANDLER, Configurator.HANDLER)
     }
 
@@ -72,6 +74,8 @@ class Configurator private constructor(){
         handleRxError()
         //初始化ARouter
         initARouter()
+        //初始化WebView
+        initWebView()
     }
 
     //初始化Iconify字体
@@ -133,14 +137,22 @@ class Configurator private constructor(){
 
     //配置七牛文件服务地址
     //"http://q65j2lskn.bkt.clouddn.com/"
-    fun withQiniuFileServerAddress(url: String) {
+    fun withQiniuFileServerAddress(url: String): Configurator {
         CONFIGS.put(ConfigKeys.QINIU_FILE_SERVER_ADDRESS, url)
+        return this
     }
 
     //获取七牛云上传凭证
     //"/mock/kotlin/get_qiniu_upload_token"
-    fun withQiniuUploadTokenUrl(url: String){
+    fun withQiniuUploadTokenUrl(url: String): Configurator{
         CONFIGS.put(ConfigKeys.QINIU_UPLOAD_TOKEN_URL, url)
+        return this
+    }
+
+    //js调用java时，注入js中的接口对象名
+    fun withJavascriptInterface(name: String): Configurator {
+        CONFIGS.put(ConfigKeys.JAVASCRIPT_INTERFACE, name)
+        return this
     }
 
     //取出某一配置项
@@ -182,6 +194,23 @@ class Configurator private constructor(){
             ARouter.openDebug()
         }
         ARouter.init(AppConfig.getApplicationContext() as Application);
+    }
+
+    //初始化WebView
+    private fun initWebView(){
+        //搜集本地tbs内核信息并上报服务器，服务器返回结果决定使用哪个内核。
+        val cb: QbSdk.PreInitCallback = object : QbSdk.PreInitCallback {
+            override fun onViewInitFinished(arg0: Boolean) {
+                // TODO Auto-generated method stub
+                //x5內核初始化完成的回调，为true表示x5内核加载成功，否则表示x5内核加载失败，会自动切换到系统内核。
+            }
+
+            override fun onCoreInitFinished() {
+                // TODO Auto-generated method stub
+            }
+        }
+        //x5内核初始化接口
+        QbSdk.initX5Environment(AppConfig.getApplicationContext(), cb)
     }
 
     //获取所有配置科目

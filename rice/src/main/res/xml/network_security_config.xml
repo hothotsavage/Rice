@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <!--    允许http访问-->
+    <base-config cleartextTrafficPermitted="true">
+        <trust-anchors>
+            <!--信任系统的CA证书-->
+            <certificates src="system" />
+            <!--信任用户导入的CA证书-->
+            <certificates src="user" />
+        </trust-anchors>
+    </base-config>
+
+    <!--    允许访问域名-->
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">www.baidu.com</domain>
+        <domain includeSubdomains="true">cfg.imtt.qq.com</domain>
+    </domain-config>
+</network-security-config>

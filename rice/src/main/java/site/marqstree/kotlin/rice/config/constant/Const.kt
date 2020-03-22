@@ -26,6 +26,9 @@ object Const {
             //在okhttp拦截器中取出sp中的token，并写入http head
             const val TOKEN = "TOKEN"
 
+            //WebView的cookie存入sp的key
+            const val COOKIE = "COOKIE"
+
             //用户信息在SP中的key
             //用户id
             const val USER_ID = "SP_USER_ID"
@@ -39,6 +42,16 @@ object Const {
             const val USER_GENDER = "SP_USER_GENDER"
             //用户签名
             const val USER_SIGN = "SP_USER_SIGN"
+        }
+    }
+
+    //X5WebView
+    class WebView{
+        companion object{
+            const val PATH_WEB_ACTIVITY = "/rice/activity/web"
+            //浏览器中注入的java对象名
+            //此对象挂在window下
+            const val ANDROID_JS_BRIDGE = "AndroidJSBridge"
         }
     }
 }

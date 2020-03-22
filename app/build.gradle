@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'//kapt 插件
 
 android {
     compileSdkVersion 29
@@ -23,6 +24,23 @@ android {
         }
     }
 
+    //指定jdk版本
+    //否则报错：
+    // Static interface methods are only supported starting with Android N (--min-api 24): void butterknife.Unbinder.lambda$static$0()
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    //开启dataBinding
+    dataBinding {
+        enabled = true
+    }
+
 }
 
 dependencies {
@@ -34,4 +52,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    implementation project(path: ':rice')
+
 }
