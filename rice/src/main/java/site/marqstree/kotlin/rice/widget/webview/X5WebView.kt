@@ -97,16 +97,17 @@ class X5WebView @JvmOverloads constructor(context: Context,
     }
 
     /**
-     * 构建 JSBridge 对象，这里提供的 JSBridge 字符串会被挂载到
-     * 网页中的 window 对象下面。
-     *
+     * java在js中的window对象下注入js对象:
      * window.AndroidJSBridge
+     * js可调用AndroidJSBridge对象下的java方法
      */
     private fun initJsBridge(){
+        // 构建 JSBridge 对象
+        // 第二个参数：定义js对象名称
         addJavascriptInterface(
             WebInterface(),
-            //从自定义配置中取js对象名
-            //没有自定义配置则取默认配置
+            //从自定义配置中取自定义的对象名
+            //没有自定义配置则取默认配置：AndroidJSBridge
             AppConfig.getConfiguration(ConfigKeys.JAVASCRIPT_INTERFACE)?: Const.WebView.ANDROID_JS_BRIDGE)
     }
 }

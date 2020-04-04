@@ -42,6 +42,10 @@ object Const {
             const val USER_GENDER = "SP_USER_GENDER"
             //用户签名
             const val USER_SIGN = "SP_USER_SIGN"
+            //用户md5密码
+            const val USER_MD5_PASSWORD = "SP_USER_MD5_PASSWORD"
+            //过期时间(单位：毫秒)
+            const val USER_END_MILLI_SECOND = "SP_USER_END_MILLI_SECOND"
         }
     }
 
@@ -52,6 +56,17 @@ object Const {
             //浏览器中注入的java对象名
             //此对象挂在window下
             const val ANDROID_JS_BRIDGE = "AndroidJSBridge"
+        }
+    }
+
+    class WebActivity{
+        companion object{
+            //保存用户密码事件名
+            const val SAVE_USER_PASSWORD_ACTION = "SAVE_USER_PASSWORD_ACTION"
+            //清除用户信息事件名
+            const val CLEAR_USER_PASSWORD_ACTION = "CLEAR_USER_PASSWORD_ACTION"
+            //载入用户密码
+            const val LOAD_USER_PASSWORD_ACTION = "LOAD_USER_PASSWORD_ACTION"
         }
     }
 }

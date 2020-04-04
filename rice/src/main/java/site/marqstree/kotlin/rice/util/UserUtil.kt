@@ -29,6 +29,21 @@ object UserUtil {
         SPStaticUtils.put(Const.SPKey.USER_MOBILE, userInfo?.mobile ?: "")
         SPStaticUtils.put(Const.SPKey.USER_GENDER, userInfo?.gender ?: "")
         SPStaticUtils.put(Const.SPKey.USER_SIGN, userInfo?.sign ?: "")
+        SPStaticUtils.put(Const.SPKey.USER_MD5_PASSWORD, userInfo?.md5Password ?: "")
+        SPStaticUtils.put(Const.SPKey.USER_END_MILLI_SECOND, userInfo?.endMilliSecond ?: 0)
+    }
+
+    //清除用户信息
+    fun clearUserInfo(){
+        SPStaticUtils.put(Const.SPKey.TOKEN, "")
+        SPStaticUtils.put(Const.SPKey.USER_ID, "")
+        SPStaticUtils.put(Const.SPKey.USER_ICON, "")
+        SPStaticUtils.put(Const.SPKey.USER_NAME, "")
+        SPStaticUtils.put(Const.SPKey.USER_MOBILE, "")
+        SPStaticUtils.put(Const.SPKey.USER_GENDER, "")
+        SPStaticUtils.put(Const.SPKey.USER_SIGN, "")
+        SPStaticUtils.put(Const.SPKey.USER_MD5_PASSWORD, "")
+        SPStaticUtils.put(Const.SPKey.USER_END_MILLI_SECOND, 0)
     }
 
     //是否登陆
@@ -58,5 +73,13 @@ object UserUtil {
 
     fun getUserSign():String{
         return SPStaticUtils.getString(Const.SPKey.USER_SIGN)
+    }
+
+    fun getUserMd5Password():String{
+        return SPStaticUtils.getString(Const.SPKey.USER_MD5_PASSWORD)
+    }
+
+    fun getUserEndMilliSecond():Long{
+        return SPStaticUtils.getLong(Const.SPKey.USER_END_MILLI_SECOND)
     }
 }

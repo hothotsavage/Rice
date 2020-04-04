@@ -1,5 +1,7 @@
 package site.marqstree.kotlin.rice.net.bean.user
 
+import java.util.*
+
 
 /*
  * 项目名: KotlinMall
@@ -17,4 +19,6 @@ data class UserInfo(val id:String,
                     val name:String,
                     val gender:String,
                     val mobile:String,
-                    val sign:String)
+                    val sign:String,
+                    val md5Password:String,
+                    var endMilliSecond:Long)

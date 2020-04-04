@@ -23,6 +23,7 @@ class EventManager private constructor(){
     }
 
     fun createEvent(action: String): IEvent {
+        //从事件数组中取出接口
         return EVENTS[action] ?: return UndefineEvent()
     }
 }

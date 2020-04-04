@@ -8,10 +8,9 @@ import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
 import kotlinx.android.synthetic.main.aty_web.*
 import site.marqstree.kotlin.rice.R
-import site.marqstree.kotlin.rice.config.AppConfig
-import site.marqstree.kotlin.rice.config.ConfigKeys
 import site.marqstree.kotlin.rice.config.constant.Const
 import site.marqstree.kotlin.rice.extent.begPermissions
+import site.marqstree.kotlin.rice.widget.webview.event.*
 
 
 /*
@@ -41,9 +40,18 @@ class WebActivity: BaseTakePhotoActivity() {
 
     fun init(){
         //获取必要权限
-        requestPermission();
+        requestPermission()
+        //加载供js调用的接口事件
+        loadEvents()
         //载入web页面
         mWebView.loadUrl(mUrl)
+    }
+
+    //加载供js调用的接口事件
+    private fun loadEvents() {
+        EventManager.INSTANCE.addEvent(Const.WebActivity.LOAD_USER_PASSWORD_ACTION, LoadUserPasswordEvent())
+        EventManager.INSTANCE.addEvent(Const.WebActivity.SAVE_USER_PASSWORD_ACTION, SaveUserPasswordEvent())
+        EventManager.INSTANCE.addEvent(Const.WebActivity.CLEAR_USER_PASSWORD_ACTION, ClearUserInfoEvent())
     }
 
     fun requestPermission(){
@@ -70,9 +78,7 @@ class WebActivity: BaseTakePhotoActivity() {
         //监听 android 后退按钮点击事件。
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             //1、首先判断当前网页是否还可以进行后退页面的操作，如果可以的话那么就后退网页。
-            if (mWebView.canGoBack() &&
-                !(AppConfig.getConfiguration(ConfigKeys.API_HOST) as String).equals(mUrl)
-            ) {
+            if (mWebView.canGoBack()) {
                 mWebView.goBack()
                 return true
             }
@@ -88,7 +94,7 @@ class WebActivity: BaseTakePhotoActivity() {
         }
         return true
     }
-    
+
     override fun onPause() {
         super.onPause()
         mWebView.onPause()
