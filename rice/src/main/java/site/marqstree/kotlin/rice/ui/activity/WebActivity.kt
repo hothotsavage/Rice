@@ -13,7 +13,7 @@ import site.marqstree.kotlin.rice.extent.begPermissions
 import site.marqstree.kotlin.rice.widget.webview.event.*
 
 
-/*
+/**
  * 项目名: Rice
  * 包名: site.marqstree.kotlin.rice.ui.activity
  * 文件名: WebActivity

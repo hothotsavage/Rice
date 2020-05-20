@@ -79,7 +79,7 @@ class RxRequest private constructor(){
     private var params = WeakHashMap<String, Any>()
     private var body by Delegates.notNull<RequestBody>()
     private lateinit var context:Context
-    private var loaderStyle: LoaderStyle = AppConfig.getConfiguration(ConfigKeys.LOADER_STYLE)
+    private var loaderStyle: LoaderStyle = AppConfig.getConfiguration(ConfigKeys.LOADER_STYLE)!!
     private var file by Delegates.notNull<File>()
 
     companion object{

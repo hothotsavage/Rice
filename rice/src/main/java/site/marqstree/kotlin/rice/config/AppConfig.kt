@@ -4,7 +4,7 @@ import android.content.Context
 import android.os.Handler
 
 
-/*
+/**
  * 项目名: KotlinMall
  * 包名: site.marqstree.kotlin.library.base.app
  * 文件名: Hou
@@ -29,7 +29,7 @@ object AppConfig {
     }
 
     //获取某一配置
-    fun <T> getConfiguration(key: Any): T? {
+    fun <T> getConfiguration(key: Any): T {
         return getConfigurator().getConfiguration(key) as T
     }
 
@@ -40,7 +40,7 @@ object AppConfig {
 
     //获取全局Handler
     fun getHandler(): Handler {
-        return getConfiguration<Handler>(ConfigKeys.HANDLER)!!
+        return getConfiguration<Handler>(ConfigKeys.HANDLER)
     }
 
 }

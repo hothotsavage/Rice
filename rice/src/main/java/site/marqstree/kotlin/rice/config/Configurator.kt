@@ -189,7 +189,7 @@ class Configurator private constructor(){
     //初始化ARouter
     private fun initARouter(){
         //Debug模式下，开启日志
-        if(AppConfig.getConfiguration(ConfigKeys.IS_DEBUG)) {
+        if(AppConfig.getConfiguration(ConfigKeys.IS_DEBUG)?:true) {
             ARouter.openLog()
             ARouter.openDebug()
         }

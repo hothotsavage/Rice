@@ -34,7 +34,7 @@ class RetrofitBuilder private constructor(){
 
     init {
         //构建全局Retrofit客户端
-        val baseUrl: String = AppConfig.getConfiguration(ConfigKeys.API_HOST)
+        val baseUrl: String = AppConfig.getConfiguration(ConfigKeys.API_HOST)!!
         retrofitClient = Retrofit.Builder()
             .baseUrl(baseUrl)
             .client(initOkHttpClient())
