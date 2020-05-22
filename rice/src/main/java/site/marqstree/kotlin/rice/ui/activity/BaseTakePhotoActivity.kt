@@ -43,7 +43,7 @@ abstract open class BaseTakePhotoActivity: BaseARouterActivity(),
     }
 
     //本地照片url
-    private var mLocalFileUrl:String = ""
+    protected var mLocalFileUrl:String = ""
     //远程照片url
     private var mRemoteFileUrl:String  = ""
     //临时存储拍照文件url
