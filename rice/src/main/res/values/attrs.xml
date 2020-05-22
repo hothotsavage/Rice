@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--自定义控件属性列表-->
+<resources>
+    <!--HeaderBar自定义属性-->
+    <declare-styleable name="HeaderBar">
+        <!--显示左侧回退按钮-->
+        <attr name="isShowBack" format="boolean" />
+        <!--中间标题-->
+        <attr name="titleText" format="string" />
+        <!--右侧文本-->
+        <attr name="rightText" format="string" />
+    </declare-styleable>
+
+    <!-- LabelText自定义属性 -->
+    <declare-styleable name="LabelText">
+        <attr name="labelText" format="string"/>
+        <attr name="contentText" format="string"/>
+    </declare-styleable>
+
+    <!-- SearchTextView自定义属性 -->
+    <declare-styleable name="SearchTextView">
+        <attr name="searchText" format="string"/>
+    </declare-styleable>
+
+</resources>

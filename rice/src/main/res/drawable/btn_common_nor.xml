@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--按钮未选中状态-->
+<!--蓝色填充圆角矩形-->
+<shape
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/common_blue" />
+    <corners android:radius="@dimen/common_radius" />
+</shape>
