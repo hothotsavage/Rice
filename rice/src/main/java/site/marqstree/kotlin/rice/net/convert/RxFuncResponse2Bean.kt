@@ -20,7 +20,7 @@ class RxFuncResponse2Bean<T>(val clazz: Class<T>): Function<StringRespBean, Obse
     override fun apply(resp: StringRespBean): Observable<T?> {
         LogUtil.d("测试","进入RxFuncResponse2Bean")
 
-        val dataStr:String = resp.data
+        val dataStr:String = resp.data.trim()
         //采用fastjson转成目标类型
         if(clazz!=String::class.java) {
             var retBean: T? = null
@@ -37,12 +37,7 @@ class RxFuncResponse2Bean<T>(val clazz: Class<T>): Function<StringRespBean, Obse
         //目标类型为字符串，则直接返回
         else {
             LogUtil.d("返回", dataStr)
-            if (dataStr.trim().isEmpty()) {
-                return Observable.just(null)
-            } else {
-                return Observable.just(dataStr as T)
-
-            }
+            return Observable.just(dataStr as T)
         }
 
     }

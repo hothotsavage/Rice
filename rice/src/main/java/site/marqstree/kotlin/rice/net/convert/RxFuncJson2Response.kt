@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject
 import io.reactivex.Observable
 import io.reactivex.functions.Function
 import site.marqstree.kotlin.rice.net.bean.response.StringRespBean
+import java.lang.Exception
 
 
 /*
@@ -16,8 +17,12 @@ import site.marqstree.kotlin.rice.net.bean.response.StringRespBean
  */
 class RxFuncJson2Response: Function<String, Observable<StringRespBean>> {
     override fun apply(json: String): Observable<StringRespBean> {
-        val retResp: StringRespBean = JSONObject.parseObject(json, StringRespBean::class.java)
-
+        var retResp: StringRespBean
+        try {
+            retResp = JSONObject.parseObject(json, StringRespBean::class.java)
+        }catch (e:Exception){
+            retResp = StringRespBean(-1, "fail","")
+        }
         //网络响应码为成功时，
         // 返回将Observable<String>转为Observable<CommonResp>
         return Observable.just(retResp)
