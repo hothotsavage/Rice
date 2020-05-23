@@ -27,20 +27,17 @@ class RxFuncResponse2Bean<T>(val clazz: Class<T>): Function<StringRespBean, Obse
         val dataStr:String = resp.data.trim()
         //采用fastjson转成目标类型
         if(clazz!=String::class.java) {
-            var retBean: T? = null
+            var retBean: T
             try {
                 retBean = JSONObject.parseObject(dataStr, clazz)
             } catch (e: Exception) {
                 LogUtil.e("json转换错误", e.message)
+                return Observable.error(Exception("数据转换失败"))
             }
             LogUtil.d("返回", retBean)
             //网络响应码为成功时，
             // 返回将Observable<String>转为Observable<T>
-            if (retBean == null) {
-                return Observable.error(Exception("数据转换失败"))
-            } else {
-                return Observable.just(retBean)
-            }
+            return Observable.just(retBean)
         }
         //目标类型为字符串，则直接返回
         else {

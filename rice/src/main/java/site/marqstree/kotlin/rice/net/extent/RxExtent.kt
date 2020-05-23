@@ -45,7 +45,7 @@ fun <T> Observable<String>.json2List(
 //json字符串转Bean
 fun <T> Observable<String>.json2Bean(
     clazz: Class<T>
-):Observable<T?>{
+):Observable<T>{
     return this.flatMap(RxFuncJson2Response())    //将Json字符串转为CommonResp
         //将CommonResp转为Bean
         .flatMap(
