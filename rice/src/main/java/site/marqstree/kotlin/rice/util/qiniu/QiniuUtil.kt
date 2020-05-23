@@ -36,8 +36,10 @@ class QiniuUtil(val localFileUrl:String,
             .setUrl(AppConfig.getConfiguration(ConfigKeys.QINIU_UPLOAD_TOKEN_URL))
             .get()
             .json2Bean(String::class.java)
-            .subscribe(object : RxObserver<String>(){
-                override fun onNext(data: String) {
+            .subscribe(object : RxObserver<String?>(){
+                override fun onNext(data: String?) {
+                    if(data.isNullOrBlank())
+                        return
                     //2)上传文件到七牛对象服务器
                     uploadFileByToken(data)
                 }

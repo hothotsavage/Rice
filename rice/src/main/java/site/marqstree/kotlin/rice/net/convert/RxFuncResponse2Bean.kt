@@ -16,8 +16,8 @@ import java.lang.Exception
  * 创建时间: 2020/2/28 16:59
  * 描述: TODO
  */
-class RxFuncResponse2Bean<T>(val clazz: Class<T>): Function<StringRespBean, Observable<T>> {
-    override fun apply(resp: StringRespBean): Observable<T> {
+class RxFuncResponse2Bean<T>(val clazz: Class<T>): Function<StringRespBean, Observable<T?>> {
+    override fun apply(resp: StringRespBean): Observable<T?> {
         LogUtil.d("测试","进入RxFuncResponse2Bean")
 
         val dataStr:String = resp.data
@@ -37,6 +37,9 @@ class RxFuncResponse2Bean<T>(val clazz: Class<T>): Function<StringRespBean, Obse
         //目标类型为字符串，则直接返回
         else{
             LogUtil.d("返回",dataStr)
+            if(dataStr.trim().isEmpty()) {
+                return Observable.just(null)
+            }
             return Observable.just(dataStr as T)
         }
 
