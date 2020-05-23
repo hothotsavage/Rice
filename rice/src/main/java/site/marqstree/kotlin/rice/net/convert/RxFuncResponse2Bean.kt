@@ -16,9 +16,13 @@ import java.lang.Exception
  * 创建时间: 2020/2/28 16:59
  * 描述: TODO
  */
-class RxFuncResponse2Bean<T>(val clazz: Class<T>): Function<StringRespBean, Observable<T?>> {
-    override fun apply(resp: StringRespBean): Observable<T?> {
+class RxFuncResponse2Bean<T>(val clazz: Class<T>): Function<StringRespBean, Observable<T>> {
+    override fun apply(resp: StringRespBean): Observable<T> {
         LogUtil.d("测试","进入RxFuncResponse2Bean")
+
+        if(resp.code!=0){
+            return Observable.error(Exception(resp.message))
+        }
 
         val dataStr:String = resp.data.trim()
         //采用fastjson转成目标类型
@@ -26,13 +30,17 @@ class RxFuncResponse2Bean<T>(val clazz: Class<T>): Function<StringRespBean, Obse
             var retBean: T? = null
             try {
                 retBean = JSONObject.parseObject(dataStr, clazz)
-            }catch (e:Exception){
-                LogUtil.e("json转换错误",e.message)
+            } catch (e: Exception) {
+                LogUtil.e("json转换错误", e.message)
             }
             LogUtil.d("返回", retBean)
             //网络响应码为成功时，
             // 返回将Observable<String>转为Observable<T>
-            return Observable.just(retBean)
+            if (retBean == null) {
+                return Observable.error(Exception("数据转换失败"))
+            } else {
+                return Observable.just(retBean)
+            }
         }
         //目标类型为字符串，则直接返回
         else {
