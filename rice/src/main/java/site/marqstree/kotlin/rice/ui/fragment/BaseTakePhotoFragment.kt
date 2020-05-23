@@ -25,7 +25,7 @@ import java.io.File
  * 文件名: BaseTake
  * 创建者: marqstree
  * 创建时间: 2020/5/23 14:12
- * 描述: TODO
+ * 描述: 带拍照功能的Fragment基类
  */
 abstract open class BaseTakePhotoFragment: BaseARouterFragment(),
     TakePhoto.TakeResultListener{
