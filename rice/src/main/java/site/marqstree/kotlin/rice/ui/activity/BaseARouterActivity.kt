@@ -9,7 +9,7 @@ import com.alibaba.android.arouter.launcher.ARouter
  * 文件名: BaseActivity
  * 创建者: marqstree
  * 创建时间: 2020/2/17 14:30
- * 描述: TODO
+ * 描述: 带拍照功能的Activity基类
  */
 open class BaseARouterActivity: BaseActivity() {
 
