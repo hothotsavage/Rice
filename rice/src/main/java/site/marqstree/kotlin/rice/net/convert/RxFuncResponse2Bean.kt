@@ -35,12 +35,14 @@ class RxFuncResponse2Bean<T>(val clazz: Class<T>): Function<StringRespBean, Obse
             return Observable.just(retBean)
         }
         //目标类型为字符串，则直接返回
-        else{
-            LogUtil.d("返回",dataStr)
-            if(dataStr.trim().isEmpty()) {
+        else {
+            LogUtil.d("返回", dataStr)
+            if (dataStr.trim().isEmpty()) {
                 return Observable.just(null)
+            } else {
+                return Observable.just(dataStr as T)
+
             }
-            return Observable.just(dataStr as T)
         }
 
     }
