@@ -29,8 +29,8 @@ object AppConfig {
     }
 
     //获取某一配置
-    fun <T> getConfiguration(key: Any): T {
-        return getConfigurator().getConfiguration(key) as T
+    fun <T> getConfiguration(key: Any): T? {
+        return getConfigurator().getConfiguration(key) as T?
     }
 
     //获取App上下文
@@ -39,7 +39,7 @@ object AppConfig {
     }
 
     //获取全局Handler
-    fun getHandler(): Handler {
+    fun getHandler(): Handler? {
         return getConfiguration<Handler>(ConfigKeys.HANDLER)
     }
 

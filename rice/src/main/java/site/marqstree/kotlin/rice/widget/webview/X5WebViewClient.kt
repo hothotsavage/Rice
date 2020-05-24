@@ -46,7 +46,7 @@ class X5WebViewClient: WebViewClient() {
         // 从sp中取出webview中的cookie,
         // 并附加到原生http请求头中
         syncCookie()
-        AppConfig.getHandler().postDelayed(
+        AppConfig.getHandler()?.postDelayed(
             Runnable { Loader.stopLoading() }, 1000
         )
     }
@@ -57,7 +57,7 @@ class X5WebViewClient: WebViewClient() {
     // 使得原生http api也能跨域向web服务器发请求
     private fun syncCookie() {
         val manager = CookieManager.getInstance()
-        val webHost: String = AppConfig.getConfiguration(ConfigKeys.API_HOST)
+        val webHost: String = AppConfig.getConfiguration(ConfigKeys.API_HOST)?:""
         if (webHost != null) {
             if (manager.hasCookies()) {
                 val cookieStr = manager.getCookie(webHost)

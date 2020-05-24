@@ -2,6 +2,7 @@ package site.marqstree.kotlin.rice.config
 
 import android.app.Application
 import android.os.Handler
+import android.util.Log
 import com.alibaba.android.arouter.launcher.ARouter
 import com.blankj.utilcode.util.Utils
 import com.joanzapata.iconify.IconFontDescriptor
@@ -14,6 +15,7 @@ import io.reactivex.plugins.RxJavaPlugins
 import okhttp3.Interceptor
 import site.marqstree.kotlin.rice.util.LogUtil
 import site.marqstree.kotlin.rice.widget.loader.LoaderStyle
+import java.lang.Exception
 import java.util.*
 
 
@@ -157,12 +159,16 @@ class Configurator private constructor(){
 
     //取出某一配置项
     //取出某一配置项
-    fun <T> getConfiguration(key: Any): T {
+    fun <T> getConfiguration(key: Any): T? {
         //检测初始化配置是否已完成
         checkConfiguration()
-        val value: Any =
-            CONFIGS.get(key) ?: throw NullPointerException("$key IS NULL")
-        return CONFIGS.get(key) as T
+        var value: T? = null
+        try {
+            value = CONFIGS.get(key) as T
+        }catch (e: Exception){
+            LogUtil.e("获取配置项：${key.toString()}失败")
+        }
+        return value
     }
 
     //检测初始化配置是否已完成

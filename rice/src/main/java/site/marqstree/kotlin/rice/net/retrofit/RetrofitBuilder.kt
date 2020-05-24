@@ -52,14 +52,15 @@ class RetrofitBuilder private constructor(){
         //全局OkHttpClient
         val okHttpBuilder: OkHttpClient.Builder = okhttp3.OkHttpClient.Builder()
 
-        val intercepters: ArrayList<Interceptor> =
+        val intercepters: ArrayList<Interceptor>? =
             AppConfig.getConfiguration(ConfigKeys.INTERCEPTOR)
 
-        intercepters.forEach {
+        intercepters?.forEach {
             okHttpBuilder.addInterceptor(it)
         }
 
-        val timeOut: Long = AppConfig.getConfiguration(ConfigKeys.HTTP_TIME_OUT)
+        //
+        val timeOut: Long = AppConfig.getConfiguration(ConfigKeys.HTTP_TIME_OUT)?: 3
 
         val okHttpClient = okHttpBuilder
             .connectTimeout(timeOut, TimeUnit.SECONDS)

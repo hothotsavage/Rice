@@ -1,6 +1,7 @@
 package site.marqstree.kotlin.rice.net.convert
 
 import com.alibaba.fastjson.JSONObject
+import com.alibaba.fastjson.parser.Feature
 import io.reactivex.Observable
 import io.reactivex.functions.Function
 import site.marqstree.kotlin.rice.net.bean.response.StringRespBean
@@ -29,6 +30,7 @@ class RxFuncResponse2Bean<T>(val clazz: Class<T>): Function<StringRespBean, Obse
         if(clazz!=String::class.java) {
             var retBean: T
             try {
+                //注意：实体类一定要声明为可选型，否则fastjson会报错
                 retBean = JSONObject.parseObject(dataStr, clazz)
             } catch (e: Exception) {
                 LogUtil.e("json转换错误", e.message)

@@ -32,8 +32,15 @@ class QiniuUtil(val localFileUrl:String,
      */
     fun uploadFile(){
         //1)获取七牛云上传凭证
+        val url:String = AppConfig.getConfiguration(ConfigKeys.QINIU_UPLOAD_TOKEN_URL)?:""
+
+        if(url.isEmpty()) {
+            LogUtil.e("++++++++++++++上传地址未配置++++++++++++")
+            return
+        }
+
         RxRequest.builder()
-            .setUrl(AppConfig.getConfiguration(ConfigKeys.QINIU_UPLOAD_TOKEN_URL))
+            .setUrl(url)
             .get()
             .json2Bean(String::class.java)
             .subscribe(object : RxObserver<String?>(){

@@ -2,7 +2,12 @@ package site.marqstree.kotlin.rice.sample
 
 import android.app.Application
 import com.joanzapata.iconify.fonts.FontAwesomeModule
+import org.jetbrains.anko.support.v4.toast
+import org.jetbrains.anko.toast
 import site.marqstree.kotlin.rice.config.AppConfig
+import site.marqstree.kotlin.rice.net.extent.json2Bean
+import site.marqstree.kotlin.rice.net.observer.RxObserver
+import site.marqstree.kotlin.rice.net.request.RxRequest
 import site.marqstree.kotlin.rice.widget.loader.LoaderStyle
 
 
