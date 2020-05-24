@@ -26,9 +26,16 @@ class MainActivity : BaseActivity() {
         }
 
         RxRequest.builder()
-            .setUrl("http://192.168.0.102:4400/api/user/login")
-            .setParam("name","hm")
+            .setUrl("http://192.168.0.102:4400/api/user/register")
+            .setParam("name","rr")
             .setParam("password","123456")
+            .setParam("gender",1)
+            .setParam("age",123)
+            .setParam("height",14.5f)
+            .setParam("weight",12.2f)
+            .setParam("email","xxoo@qq.com")
+            .setParam("question","q")
+            .setParam("answer","a")
             .post()
             .json2Bean(UserBean::class.java)
             .subscribe(object : RxObserver<UserBean>(){

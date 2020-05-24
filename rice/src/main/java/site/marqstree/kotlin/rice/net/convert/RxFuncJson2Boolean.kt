@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject
 import io.reactivex.Observable
 import io.reactivex.functions.Function
 import site.marqstree.kotlin.rice.config.constant.Const
+import site.marqstree.kotlin.rice.net.bean.response.BaseRespBean
 import site.marqstree.kotlin.rice.net.bean.response.StringRespBean
 import site.marqstree.kotlin.rice.net.exception.RespException
 
@@ -18,7 +19,7 @@ import site.marqstree.kotlin.rice.net.exception.RespException
  */
 class RxFuncJson2Boolean: Function<String, Observable<Boolean>> {
     override fun apply(json: String): Observable<Boolean> {
-        val retData: StringRespBean = JSONObject.parseObject(json, StringRespBean::class.java)
+        val retData: BaseRespBean = JSONObject.parseObject(json, BaseRespBean::class.java)
 
         if(retData.code!= Const.ResultCode.SUCCESS){
             return Observable.error(

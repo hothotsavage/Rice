@@ -39,7 +39,11 @@ class RxFuncResponse2Bean<T>(val clazz: Class<T>): Function<StringRespBean, Obse
             LogUtil.d("返回", retBean)
             //网络响应码为成功时，
             // 返回将Observable<String>转为Observable<T>
-            return Observable.just(retBean)
+            if (retBean == null) {
+                return Observable.error(Exception("数据转换失败"))
+            } else {
+                return Observable.just(retBean)
+            }
         }
         //目标类型为字符串，则直接返回
         else {
