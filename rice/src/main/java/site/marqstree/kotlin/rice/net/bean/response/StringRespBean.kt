@@ -11,4 +11,4 @@ package site.marqstree.kotlin.rice.net.bean.response
  */
 data class StringRespBean (val code:Int,
                            val message:String,
-                           val data: String)
+                           val data: String?)

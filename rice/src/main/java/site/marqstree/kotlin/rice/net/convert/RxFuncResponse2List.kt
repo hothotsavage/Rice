@@ -24,7 +24,7 @@ class RxFuncResponse2List<T>(val clazz: Class<T>): Function<StringRespBean, Obse
             return Observable.error(Exception(resp.message))
         }
 
-        val dataStr:String = resp.data
+        val dataStr:String = resp.data?:""
         var retList: List<T>
         try {
             retList = JSONObject.parseArray(dataStr, clazz)

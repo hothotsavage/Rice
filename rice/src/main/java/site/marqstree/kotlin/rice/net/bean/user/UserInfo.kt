@@ -14,11 +14,11 @@ import java.util.*
 /*
     用户实体类
  */
-data class UserInfo(val id:String,
-                    val icon:String,
-                    val name:String,
-                    val gender:String,
-                    val mobile:String,
-                    val sign:String,
-                    val md5Password:String,
-                    var endMilliSecond:Long)
+data class UserInfo(val id:String?,
+                    val icon:String?,
+                    val name:String?,
+                    val gender:String?,
+                    val mobile:String?,
+                    val sign:String?,
+                    val md5Password:String?,
+                    var endMilliSecond:Long?)

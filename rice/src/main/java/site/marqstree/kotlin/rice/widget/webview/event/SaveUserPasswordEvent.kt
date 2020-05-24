@@ -22,7 +22,7 @@ class SaveUserPasswordEvent:IEvent {
     override fun execute(params: String): String {
         try {
             val userInfo: UserInfo = JSONObject.parseObject(params, UserInfo::class.java)
-            if (userInfo.name.isBlank() || userInfo.md5Password.isBlank())
+            if (userInfo.name?.isBlank()?:false || userInfo.md5Password?.isBlank()?:false)
                 return "-1"
             userInfo.endMilliSecond = TimeUtils.getNowMills()
             UserUtil.putUserInfo(userInfo)

@@ -25,7 +25,7 @@ class RxFuncResponse2Bean<T>(val clazz: Class<T>): Function<StringRespBean, Obse
             return Observable.error(Exception(resp.message))
         }
 
-        val dataStr:String = resp.data.trim()
+        val dataStr:String = resp.data?:""
         //采用fastjson转成目标类型
         if(clazz!=String::class.java) {
             var retBean: T
