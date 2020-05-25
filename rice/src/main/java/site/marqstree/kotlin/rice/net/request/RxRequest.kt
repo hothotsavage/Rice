@@ -152,7 +152,15 @@ class RxRequest private constructor(){
         val requestBody: RequestBody = file.asRequestBody("text/x-markdown; charset=utf-8".toMediaType())
         val partBody: MultipartBody.Part = MultipartBody.Part.
             createFormData("file", file.getName(), requestBody)
-        val retObs:Observable<String> = rxServiceUpload.upload(url, partBody)
+
+        var fulUrl: String = url
+        val host: String = AppConfig.getConfiguration(ConfigKeys.API_HOST)?:""
+        if(!url.contains("http",ignoreCase = true)) {
+            fulUrl = host + url
+        } else {
+            fulUrl = url
+        }
+        val retObs:Observable<String> = rxServiceUpload.upload(fulUrl, partBody)
 
         return retObs
     }

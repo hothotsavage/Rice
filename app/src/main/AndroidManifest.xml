@@ -2,13 +2,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="site.marqstree.kotlin.rice">
 
-<!--    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />-->
-<!--    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />-->
-<!--    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />-->
-<!--    <uses-permission android:name="android.permission.INTERNET" />-->
-<!--    <uses-permission android:name="android.permission.READ_PHONE_STATE" />-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.CAMERA"/>
 
-
+<!--    注意：兼容android10配置项，否则无法访问本地照片文件-->
+<!--    android:requestLegacyExternalStorage="true"-->
     <application
         android:name=".sample.MyApp"
         android:allowBackup="true"
@@ -17,6 +19,7 @@
         android:roundIcon="@drawable/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+        android:requestLegacyExternalStorage="true"
         >
         <activity android:name=".sample.MainActivity">
             <intent-filter>
@@ -25,6 +28,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".sample.Aty_Camera"/>
+
+        <!--将本应用目录中的文件暴露给外部应用-->
+        <!--android:authorities:一个标识，在当前系统内必须是唯一值，一般用包名。用FileProvider.getUriForFile将物理路径转换为uri时使用-->
+        <!--android:exported="false"表示该FileProvider只能本应用使用，不是public的-->
+        <!--granUriPermissions：是否允许授权文件的临时访问权限。这里需要，所以是 true-->
+<!--        <provider-->
+<!--            android:name="androidx.core.content.FileProvider"-->
+<!--            android:authorities="com.zhihu.matisse.sample.fileprovider"-->
+<!--            android:exported="false"-->
+<!--            android:grantUriPermissions="true">-->
+<!--            <meta-data-->
+<!--                android:name="android.support.FILE_PROVIDER_PATHS"-->
+<!--                android:resource="@xml/fileproviderpath"/>-->
+<!--        </provider>-->
     </application>
 
 </manifest>

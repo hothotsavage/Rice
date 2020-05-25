@@ -1,12 +1,18 @@
 package site.marqstree.kotlin.rice.sample
 
+import android.Manifest
+import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.AttributeSet
+import android.view.View
 import com.alibaba.android.arouter.launcher.ARouter
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.toast
 import site.marqstree.kotlin.rice.R
 import site.marqstree.kotlin.rice.config.constant.Const
+import site.marqstree.kotlin.rice.extent.begPermissions
 import site.marqstree.kotlin.rice.net.extent.json2Bean
 import site.marqstree.kotlin.rice.net.observer.RxObserver
 import site.marqstree.kotlin.rice.net.request.RxRequest
@@ -18,13 +24,24 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        mBtnOpenWeb.setOnClickListener{
-            ARouter.getInstance()
-                .build(Const.WebView.PATH_WEB_ACTIVITY)
-                .withString("mUrl","https://www.baidu.com")
-                .navigation()
-        }
+        //申请权限
+        begPermissions(
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.INTERNET,
+            Manifest.permission.CAMERA
+        )
 
+        testWebView()
+        testCamera()
+    }
+
+    override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
+        return super.onCreateView(name, context, attrs)
+
+    }
+
+    fun testNet() {
         RxRequest.builder()
             .setUrl("http://192.168.0.102:4400/api/user/register")
             .setParam("name","rr")
@@ -49,5 +66,22 @@ class MainActivity : BaseActivity() {
                     super.onError(e)
                 }
             })
+    }
+
+    fun testWebView(){
+        mBtnOpenWeb.setOnClickListener{
+            ARouter.getInstance()
+                .build(Const.WebView.PATH_WEB_ACTIVITY)
+                .withString("mUrl","https://www.baidu.com")
+                .navigation()
+        }
+    }
+
+    fun testCamera(){
+        mBtnGotoCameraAty.setOnClickListener{
+            ARouter.getInstance()
+                .build("/rice/mycamera")
+                .navigation()
+        }
     }
 }

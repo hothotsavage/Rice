@@ -29,7 +29,7 @@ class MyApp : Application() {
             .withLoaderStyle(LoaderStyle.PacmanIndicator)   //初始化加载进度对话框默认图标
             .withLoaderDelayed(500)               //记录进度对话框延迟关闭时间，单位:ms
             .withHttpTimeOut(3000)
-            .withWebHost("https://www.baidu.com")
+            .withWebHost("http://192.168.137.1:4400")
             .withJavascriptInterface("AndroidJSBridge")
             .withDebug(true)        //开启调试模式
             .configure();   //加载配置项
